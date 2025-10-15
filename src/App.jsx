@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router";
 import HomePage from "./Pages/HomePage/HomePage";
-import Checkout from "./Pages/Checkout/Checkout";
+import CheckoutPage from "./Pages/Checkout/CheckoutPage";
 import "./App.css";
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
       />
       <Route
         path="checkout"
-        element={<Checkout />}
+        element={<CheckoutPage />}
       />
     </Routes>
   );
