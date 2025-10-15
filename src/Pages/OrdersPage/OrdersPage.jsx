@@ -1,4 +1,4 @@
-import Header from "../../Header/Header";
+import Header from "../../Components/Header/Header";
 import "./OrdersPage.css";
 
 const OrdersPage = () => {

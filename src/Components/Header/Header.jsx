@@ -1,11 +1,12 @@
+import { Link } from "react-router";
 import "./Header.css";
 
 const Header = () => {
   return (
     <div className="header">
       <div className="left-section">
-        <a
-          href="/"
+        <Link
+          to="/"
           className="header-link">
           <img
             className="logo"
@@ -15,7 +16,7 @@ const Header = () => {
             className="mobile-logo"
             src="images/mobile-logo-white.png"
           />
-        </a>
+        </Link>
       </div>
       <div className="middle-section">
         <input
@@ -33,22 +34,22 @@ const Header = () => {
       </div>
 
       <div className="right-section">
-        <a
+        <Link
           className="orders-link header-link"
-          href="/orders">
+          to="/orders">
           <span className="orders-text">Orders</span>
-        </a>
+        </Link>
 
-        <a
+        <Link
           className="cart-link header-link"
-          href="/checkout">
+          to="/checkout">
           <img
             className="cart-icon"
             src="images/icons/cart-icon.png"
           />
           <div className="cart-quantity">3</div>
           <div className="cart-text">Cart</div>
-        </a>
+        </Link>
       </div>
     </div>
   );
