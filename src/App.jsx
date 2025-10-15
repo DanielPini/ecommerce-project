@@ -3,11 +3,16 @@ import HomePage from "./Pages/HomePage/HomePage";
 import CheckoutPage from "./Pages/Checkout/CheckoutPage";
 import TrackingPage from "./Pages/TrackingPage/TrackingPage";
 import OrdersPage from "./Pages/OrdersPage/OrdersPage";
+import PageNotFound from "./Pages/pageNotFound/pageNotFound";
 import "./App.css";
 
 function App() {
   return (
     <Routes>
+      <Route
+        path="*"
+        element={<PageNotFound />}
+      />
       <Route
         index
         element={<HomePage />}
