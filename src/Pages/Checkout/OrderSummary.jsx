@@ -5,7 +5,7 @@ import DeliveryOptions from "./DeliveryOptions";
 const OrderSummary = ({ cart, deliveryOptions }) => {
   return (
     <div className="order-summary">
-      {deliveryOptions.length > 0 &&
+      {Array.isArray(deliveryOptions) &&
         cart.map((cartItem) => {
           const selectedDeliveryOption = deliveryOptions.find(
             (deliveryOption) => {
@@ -18,9 +18,12 @@ const OrderSummary = ({ cart, deliveryOptions }) => {
               className="cart-item-container">
               <div className="delivery-date">
                 Delivery date:{" "}
-                {dayjs(selectedDeliveryOption.estimatedDeliveryTimeMs).format(
-                  "dddd, MMMM D"
-                )}
+                {selectedDeliveryOption &&
+                selectedDeliveryOption.estimatedDeliveryTimeMs
+                  ? dayjs(
+                      selectedDeliveryOption.estimatedDeliveryTimeMs
+                    ).format("dddd, MMMM D")
+                  : "No delivery option found"}
               </div>
 
               <div className="cart-item-details-grid">
