@@ -1,7 +1,7 @@
 import Header from "../../Components/Header/Header";
 import "./PageNotFound.css";
 
-const PageNotFound = () => {
+const PageNotFound = ({ cart }) => {
   console.log("Page wasn't found");
   return (
     <>
@@ -11,7 +11,7 @@ const PageNotFound = () => {
         type="image/svg-xml"
         href="home-favicon.png"
       />
-      <Header />
+      <Header cart={cart} />
       <div className="not-found-text">
         <p>Whoops! Looks like this page doesn't exist.</p>
       </div>
