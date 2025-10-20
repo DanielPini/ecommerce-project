@@ -6,9 +6,9 @@ import "./CheckoutHeader.css";
 
 const CheckoutHeader = ({ cart }) => {
   let totalQuantity = 0;
-  console.log(cart);
-  cart.forEach((item) => {
-    totalQuantity += item.quantity;
+
+  cart.forEach((cartItem) => {
+    totalQuantity += cartItem.quantity;
   });
 
   return (
