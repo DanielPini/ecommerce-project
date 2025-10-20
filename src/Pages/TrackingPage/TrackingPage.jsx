@@ -1,7 +1,29 @@
+import { useParams } from "react-router";
 import Header from "../../Components/Header/Header";
 import "./TrackingPage.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import TrackingItem from "./TrackingItem";
 
 const TrackingPage = ({ cart }) => {
+  const [order, setOrder] = useState(null);
+  const { orderId, productId } = useParams();
+  useEffect(() => {
+    const fetchTrackingData = async () => {
+      const res = await axios.get(`/api/orders/${orderId}?expand=products`);
+      setOrder(res.data);
+    };
+    fetchTrackingData();
+  }, [orderId]);
+
+  let item = null;
+
+  if (order) {
+    item = order.products.find(
+      (orderItem) => orderItem.productId === productId
+    );
+  }
+
   return (
     <>
       <title>Tracking</title>
@@ -19,28 +41,12 @@ const TrackingPage = ({ cart }) => {
             View all orders
           </a>
 
-          <div className="delivery-date">Arriving on Monday, June 13</div>
-
-          <div className="product-info">
-            Black and Gray Athletic Cotton Socks - 6 Pairs
-          </div>
-
-          <div className="product-info">Quantity: 1</div>
-
-          <img
-            className="product-image"
-            src="images/products/athletic-cotton-socks-6-pairs.jpg"
-          />
-
-          <div className="progress-labels-container">
-            <div className="progress-label">Preparing</div>
-            <div className="progress-label current-status">Shipped</div>
-            <div className="progress-label">Delivered</div>
-          </div>
-
-          <div className="progress-bar-container">
-            <div className="progress-bar"></div>
-          </div>
+          {item && (
+            <TrackingItem
+              item={item}
+              order={order}
+            />
+          )}
         </div>
       </div>
     </>
