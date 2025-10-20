@@ -1,4 +1,5 @@
 import Header from "../../Components/Header/Header";
+import "./PageNotFound.css";
 
 const PageNotFound = () => {
   console.log("Page wasn't found");
@@ -11,7 +12,7 @@ const PageNotFound = () => {
         href="home-favicon.png"
       />
       <Header />
-      <div>
+      <div className="not-found-text">
         <p>Whoops! Looks like this page doesn't exist.</p>
       </div>
     </>
