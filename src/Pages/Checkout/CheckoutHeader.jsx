@@ -4,7 +4,13 @@ import checkoutLockIcon from "../../assets/images/icons/checkout-lock-icon.png";
 import { Link } from "react-router";
 import "./CheckoutHeader.css";
 
-const CheckoutHeader = () => {
+const CheckoutHeader = ({ cart }) => {
+  let totalQuantity = 0;
+  console.log(cart);
+  cart.forEach((item) => {
+    totalQuantity += item.quantity;
+  });
+
   return (
     <div className="checkout-header">
       <div className="header-content">
@@ -26,7 +32,7 @@ const CheckoutHeader = () => {
           <Link
             className="return-to-home-link"
             to="/">
-            3 items
+            {totalQuantity} {totalQuantity > 1 ? "items" : "item"}
           </Link>
           )
         </div>

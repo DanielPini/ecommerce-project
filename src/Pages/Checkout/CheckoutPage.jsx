@@ -1,7 +1,7 @@
 import CheckoutHeader from "./CheckoutHeader";
 import "./CheckoutPage.css";
 
-const Checkout = () => {
+const Checkout = ({ cart }) => {
   return (
     <>
       <title>Checkout</title>
@@ -11,7 +11,7 @@ const Checkout = () => {
         href="cart-favicon.png"
       />
 
-      <CheckoutHeader />
+      <CheckoutHeader cart={cart} />
 
       <div className="checkout-page">
         <div className="page-title">Review your order</div>
