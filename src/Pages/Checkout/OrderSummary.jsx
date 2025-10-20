@@ -2,7 +2,7 @@ import DeliveryOptions from "./DeliveryOptions";
 import CartItemDetails from "./CartItemDetails";
 import DeliveryDate from "./DeliveryDate";
 
-const OrderSummary = ({ cart, deliveryOptions }) => {
+const OrderSummary = ({ cart, deliveryOptions, loadCart }) => {
   return (
     <div className="order-summary">
       {Array.isArray(deliveryOptions) &&
@@ -24,6 +24,7 @@ const OrderSummary = ({ cart, deliveryOptions }) => {
                 <DeliveryOptions
                   deliveryOptions={deliveryOptions}
                   cartItem={cartItem}
+                  loadCart={loadCart}
                 />
               </div>
             </div>

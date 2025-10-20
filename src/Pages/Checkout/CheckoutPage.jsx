@@ -5,21 +5,26 @@ import { useEffect, useState } from "react";
 import OrderSummary from "./OrderSummary";
 import PaymentSummary from "./PaymentSummary";
 
-const CheckoutPage = ({ cart }) => {
+const CheckoutPage = ({ cart, loadCart }) => {
   const [deliveryOptions, setDeliveryOptions] = useState([]);
   const [paymentSummary, setPaymentSummary] = useState(null);
 
   useEffect(() => {
-    const fetchCheckoutData = async () => {
-      let res = await axios.get(
+    const getPaymentSummary = async () => {
+      const res = await axios.get("/api/payment-summary");
+      setPaymentSummary(res.data);
+    };
+    getPaymentSummary();
+  }, [paymentSummary]);
+
+  useEffect(() => {
+    const getDeliveryData = async () => {
+      const res = await axios.get(
         "/api/delivery-options?expand=estimatedDeliveryTime"
       );
       setDeliveryOptions(res.data);
-
-      res = await axios.get("/api/payment-summary");
-      setPaymentSummary(res.data);
     };
-    fetchCheckoutData();
+    getDeliveryData();
   }, []);
 
   return (
@@ -40,6 +45,7 @@ const CheckoutPage = ({ cart }) => {
           <OrderSummary
             cart={cart}
             deliveryOptions={deliveryOptions}
+            loadCart={loadCart}
           />
 
           <PaymentSummary paymentSummary={paymentSummary} />
