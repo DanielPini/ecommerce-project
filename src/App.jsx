@@ -8,6 +8,8 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+window.axios = axios;
+
 function App() {
   const [cart, setCart] = useState([]);
 

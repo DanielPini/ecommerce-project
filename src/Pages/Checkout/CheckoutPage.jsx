@@ -15,7 +15,7 @@ const CheckoutPage = ({ cart, loadCart }) => {
       setPaymentSummary(res.data);
     };
     getPaymentSummary();
-  }, [paymentSummary]);
+  }, [cart]);
 
   useEffect(() => {
     const getDeliveryData = async () => {
