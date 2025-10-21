@@ -5,6 +5,8 @@ import DeliveryDate from "./DeliveryDate";
 const OrderSummary = ({ cart, deliveryOptions, loadCart }) => {
   return (
     <div className="order-summary">
+      {!Array.isArray(cart) ||
+        (cart.length === 0 && <div>Your cart is currently empty</div>)}
       {Array.isArray(deliveryOptions) &&
         cart.map((cartItem) => {
           const selectedDeliveryOption = deliveryOptions.find(
