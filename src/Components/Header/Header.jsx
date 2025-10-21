@@ -2,10 +2,28 @@ import logoWhite from "../../assets/images/logo-white.png";
 import mobileLogoWhite from "../../assets/images/mobile-logo-white.png";
 import searchIcon from "../../assets/images/icons/search-icon.png";
 import cartIcon from "../../assets/images/icons/cart-icon.png";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate, useSearchParams } from "react-router";
 import "./Header.css";
+import { useEffect, useState } from "react";
 
 const Header = ({ cart }) => {
+  const [searchText, setSearchText] = useState("");
+
+  const [searchParams] = useSearchParams();
+  const search = searchParams.get("search");
+
+  useEffect(() => {
+    setSearchText(search);
+  }, [search]);
+
+  const navigate = useNavigate();
+
+  const submitSearch = (event) => {
+    console.log(`Search (${event}):`, searchText);
+    setSearchText("");
+    navigate(`/?search=${searchText}`);
+  };
+
   let totalQuantity = 0;
 
   cart.forEach((cartItem) => {
@@ -32,9 +50,22 @@ const Header = ({ cart }) => {
           className="search-bar"
           type="text"
           placeholder="Search"
+          value={searchText}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              submitSearch("Enter");
+            } else if (e.key === "Escape") {
+              setSearchText("");
+            }
+          }}
         />
 
-        <button className="search-button">
+        <button
+          className="search-button"
+          onClick={() => submitSearch("Click")}>
           <img
             className="search-icon"
             src={searchIcon}

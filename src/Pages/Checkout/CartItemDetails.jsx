@@ -60,6 +60,14 @@ const CartItemDetails = ({ cartItem, loadCart }) => {
               min="1"
               type="text"
               onChange={(e) => setQuantity(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  updateCartItem();
+                } else if (e.key === "Escape") {
+                  setQuantity(cartItem.quantity);
+                  setIsUpdating(false);
+                }
+              }}
               style={quantityBoxStyle}
             />
             <span className="quantity-label">{cartItem.quantity}</span>
