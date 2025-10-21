@@ -8,12 +8,17 @@ import TrackingItem from "./TrackingItem";
 const TrackingPage = ({ cart }) => {
   const [order, setOrder] = useState(null);
   const { orderId, productId } = useParams();
+
   useEffect(() => {
-    const fetchTrackingData = async () => {
-      const res = await axios.get(`/api/orders/${orderId}?expand=products`);
-      setOrder(res.data);
-    };
-    fetchTrackingData();
+    try {
+      const fetchTrackingData = async () => {
+        const res = await axios.get(`/api/orders/${orderId}?expand=products`);
+        setOrder(res.data);
+      };
+      fetchTrackingData();
+    } catch (err) {
+      console.error("Could not fetch tracking data:", err);
+    }
   }, [orderId]);
 
   let item = null;

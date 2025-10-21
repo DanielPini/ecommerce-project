@@ -8,11 +8,15 @@ const HomePage = ({ cart, loadCart }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const getHomeData = async () => {
-      const res = await axios.get("/api/products");
-      setProducts(res.data);
-    };
-    getHomeData();
+    try {
+      const getHomeData = async () => {
+        const res = await axios.get("/api/products");
+        setProducts(res.data);
+      };
+      getHomeData();
+    } catch (err) {
+      console.error("Could not fetch home data:", err);
+    }
   }, []);
 
   return (

@@ -10,21 +10,29 @@ const CheckoutPage = ({ cart, loadCart }) => {
   const [paymentSummary, setPaymentSummary] = useState(null);
 
   useEffect(() => {
-    const getPaymentSummary = async () => {
-      const res = await axios.get("/api/payment-summary");
-      setPaymentSummary(res.data);
-    };
-    getPaymentSummary();
+    try {
+      const getPaymentSummary = async () => {
+        const res = await axios.get("/api/payment-summary");
+        setPaymentSummary(res.data);
+      };
+      getPaymentSummary();
+    } catch (err) {
+      console.error("Could not fetch payment summary:", err);
+    }
   }, [cart]);
 
   useEffect(() => {
-    const getDeliveryData = async () => {
-      const res = await axios.get(
-        "/api/delivery-options?expand=estimatedDeliveryTime"
-      );
-      setDeliveryOptions(res.data);
-    };
-    getDeliveryData();
+    try {
+      const getDeliveryData = async () => {
+        const res = await axios.get(
+          "/api/delivery-options?expand=estimatedDeliveryTime"
+        );
+        setDeliveryOptions(res.data);
+      };
+      getDeliveryData();
+    } catch (err) {
+      console.error("Could not fetch delivery data:", err);
+    }
   }, []);
 
   return (

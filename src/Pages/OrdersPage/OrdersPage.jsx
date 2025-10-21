@@ -8,11 +8,15 @@ const OrdersPage = ({ cart, loadCart }) => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    const fetchOrders = async () => {
-      const res = await axios.get("/api/orders?expand=products");
-      setOrders(res.data);
-    };
-    fetchOrders();
+    try {
+      const fetchOrders = async () => {
+        const res = await axios.get("/api/orders?expand=products");
+        setOrders(res.data);
+      };
+      fetchOrders();
+    } catch (err) {
+      console.error("Could not fetch orders:", err);
+    }
   }, []);
 
   return (
