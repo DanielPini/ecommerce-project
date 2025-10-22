@@ -1,4 +1,4 @@
-import Product from "../../Pages/HomePage/Product";
+import Product from "./Product";
 
 const ProductsGrid = ({ products, loadCart }) => {
   return (
