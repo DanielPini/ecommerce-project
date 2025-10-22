@@ -1,4 +1,4 @@
-import Header from "../../Components/Header/Header";
+import Header from "../../components1/Header/Header";
 import "./PageNotFound.css";
 
 const PageNotFound = ({ cart }) => {
