@@ -1,9 +1,9 @@
 import axios from "axios";
-import Header from "../../components/header/Header";
 import "./HomePage.css";
 import { useEffect, useState } from "react";
 import ProductsGrid from "./ProductsGrid";
 import { useSearchParams } from "react-router";
+import Header from "../../components/header/Header";
 
 const HomePage = ({ cart, loadCart }) => {
   const [products, setProducts] = useState([]);

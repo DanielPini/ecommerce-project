@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Header from "../../Components/Header/Header";
+import Header from "../../components/header/Header";
 import "./OrdersPage.css";
 import axios from "axios";
 import OrdersGrid from "./OrdersGrid";
