@@ -13,7 +13,7 @@ const Header = ({ cart }) => {
   const search = searchParams.get("search");
 
   useEffect(() => {
-    setSearchText(search);
+    setSearchText(search ?? "");
   }, [search]);
 
   const navigate = useNavigate();

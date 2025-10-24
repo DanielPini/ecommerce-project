@@ -54,6 +54,7 @@ const Product = ({ product, loadCart }) => {
       <div className="product-price">{formatMoney(product.priceCents)}</div>
       <div className="product-quantity-container">
         <select
+          data-testid="quantity-selector"
           value={quantity}
           onChange={selectQuantity}>
           <option value="1">1</option>
