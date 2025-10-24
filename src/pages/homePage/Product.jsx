@@ -31,6 +31,7 @@ const Product = ({ product, loadCart }) => {
   return (
     <div
       className="product-container"
+      data-testid="product-container"
       key={product.id}>
       <div className="product-image-container">
         <img
