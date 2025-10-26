@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import formatMoney from "../../utils1/money";
+import formatMoney from "../../utils/money";
 import axios from "axios";
 
 const DeliveryOptions = ({ deliveryOptions, cartItem, loadCart }) => {
@@ -23,7 +23,8 @@ const DeliveryOptions = ({ deliveryOptions, cartItem, loadCart }) => {
           <div
             key={deliveryOption.id}
             className="delivery-option"
-            onClick={updateDeliveryOption}>
+            onClick={updateDeliveryOption}
+          >
             <input
               type="radio"
               checked={deliveryOption.id === cartItem.deliveryOptionId}
@@ -34,7 +35,7 @@ const DeliveryOptions = ({ deliveryOptions, cartItem, loadCart }) => {
             <div>
               <div className="delivery-option-date">
                 {dayjs(deliveryOption.estimatedDeliveryTimeMs).format(
-                  "dddd, MMMM D"
+                  "dddd, MMMM D",
                 )}
               </div>
               <div className="delivery-option-price">{priceString}</div>

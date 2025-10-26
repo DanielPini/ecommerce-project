@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import Header from "../../components1/Header/Header";
+import Header from "../../components/header1/Header";
 import "./TrackingPage.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -25,33 +25,22 @@ const TrackingPage = ({ cart }) => {
 
   if (order) {
     item = order.products.find(
-      (orderItem) => orderItem.productId === productId
+      (orderItem) => orderItem.productId === productId,
     );
   }
 
   return (
     <>
       <title>Tracking</title>
-      <link
-        rel="icon"
-        type="image/svg-xml"
-        href="tracking-favicon.png"
-      />
+      <link rel="icon" type="image/svg-xml" href="tracking-favicon.png" />
       <Header cart={cart} />
       <div className="tracking-page">
         <div className="order-tracking">
-          <a
-            className="back-to-orders-link link-primary"
-            href="/orders">
+          <a className="back-to-orders-link link-primary" href="/orders">
             View all orders
           </a>
 
-          {item && (
-            <TrackingItem
-              item={item}
-              order={order}
-            />
-          )}
+          {item && <TrackingItem item={item} order={order} />}
         </div>
       </div>
     </>

@@ -1,4 +1,4 @@
-import Header from "../../components1/Header/Header";
+import Header from "../../components/header1/Header";
 import "./PageNotFound.css";
 
 const PageNotFound = ({ cart }) => {
@@ -6,11 +6,7 @@ const PageNotFound = ({ cart }) => {
   return (
     <>
       <title>404 Page not found</title>
-      <link
-        rel="icon"
-        type="image/svg-xml"
-        href="home-favicon.png"
-      />
+      <link rel="icon" type="image/svg-xml" href="home-favicon.png" />
       <Header cart={cart} />
       <div className="not-found-text">
         <p>Whoops! Looks like this page doesn't exist.</p>
