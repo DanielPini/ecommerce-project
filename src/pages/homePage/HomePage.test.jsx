@@ -9,6 +9,7 @@ vi.mock("axios");
 
 describe("HomePage component", () => {
   let loadCart;
+  let user;
 
   beforeEach(() => {
     loadCart = vi.fn();
@@ -46,13 +47,12 @@ describe("HomePage component", () => {
 
     axios.post = vi.fn().mockResolvedValue({});
 
+    user = userEvent.setup();
+
     render(
       <MemoryRouter>
-        <HomePage
-          cart={[]}
-          loadCart={loadCart}
-        />
-      </MemoryRouter>
+        <HomePage cart={[]} loadCart={loadCart} />
+      </MemoryRouter>,
     );
   });
 
@@ -63,33 +63,31 @@ describe("HomePage component", () => {
 
     expect(
       within(productContainers[0]).getByText(
-        "Black and Gray Athletic Cotton Socks - 6 Pairs"
-      )
+        "Black and Gray Athletic Cotton Socks - 6 Pairs",
+      ),
     ).toBeInTheDocument();
 
     expect(
-      within(productContainers[1]).getByText("Intermediate Size Basketball")
+      within(productContainers[1]).getByText("Intermediate Size Basketball"),
     ).toBeInTheDocument();
   });
 
-  it("displays the products correctly", async () => {
+  it("adds products correctly to cart when add to cart button is clicked", async () => {
     const productContainers = await screen.findAllByTestId("product-container");
 
     expect(productContainers.length).toBe(2);
 
-    const addToCartButton1 = within(productContainers[0]).getByTestId(
-      "add-to-cart-button"
+    let addToCartButton = within(productContainers[0]).getByTestId(
+      "add-to-cart-button",
     );
 
-    const user = userEvent.setup();
+    await user.click(addToCartButton);
 
-    await user.click(addToCartButton1);
-
-    const addToCartButton2 = within(productContainers[1]).getByTestId(
-      "add-to-cart-button"
+    addToCartButton = within(productContainers[1]).getByTestId(
+      "add-to-cart-button",
     );
 
-    await user.click(addToCartButton2);
+    await user.click(addToCartButton);
 
     expect(axios.post).toHaveBeenNthCalledWith(1, "/api/cart-items", {
       productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -98,6 +96,45 @@ describe("HomePage component", () => {
     expect(axios.post).toHaveBeenNthCalledWith(2, "/api/cart-items", {
       productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
       quantity: 1,
+    });
+
+    expect(loadCart).toHaveBeenCalledTimes(2);
+  });
+
+  it("accepts the updated quantity from quantitySelector", async () => {
+    const productContainers = await screen.findAllByTestId("product-container");
+
+    let quantitySelector = within(productContainers[0]).getByTestId(
+      "quantity-selector",
+    );
+
+    await user.selectOptions(quantitySelector, "2");
+
+    let addToCartButton = within(productContainers[0]).getByTestId(
+      "add-to-cart-button",
+    );
+    await user.click(addToCartButton);
+
+    expect(axios.post).toHaveBeenNthCalledWith(1, "/api/cart-items", {
+      productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+      quantity: 2,
+    });
+
+    quantitySelector = within(productContainers[1]).getByTestId(
+      "quantity-selector",
+    );
+
+    await user.selectOptions(quantitySelector, "3");
+
+    addToCartButton = within(productContainers[1]).getByTestId(
+      "add-to-cart-button",
+    );
+
+    await user.click(addToCartButton);
+
+    expect(axios.post).toHaveBeenNthCalledWith(2, "/api/cart-items", {
+      productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
+      quantity: 3,
     });
 
     expect(loadCart).toHaveBeenCalledTimes(2);
